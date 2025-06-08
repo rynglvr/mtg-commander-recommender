@@ -1,0 +1,7 @@
+mtg-env-311/
+*.pyc
+__pycache__/
+.DS_Store
+.ipynb_checkpoints/
+data/mtg_cards_raw.csv
+data/mtg_model.pkl

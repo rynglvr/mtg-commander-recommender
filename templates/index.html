@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTG Commander Deck Recommender</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .search-box { margin-bottom: 30px; }
+        .search-box input { padding: 10px; width: 300px; font-size: 16px; }
+        .search-box button { padding: 10px 20px; font-size: 16px; background: #007bff; color: white; border: none; cursor: pointer; }
+        .commander-info { background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .recommendations { display: grid; gap: 15px; }
+        .card { border: 1px solid #ddd; padding: 15px; border-radius: 8px; background: white; }
+        .card-name { font-weight: bold; font-size: 18px; color: #007bff; }
+        .card-type { color: #666; margin: 5px 0; }
+        .card-text { margin: 10px 0; line-height: 1.4; }
+        .similarity { background: #28a745; color: white; padding: 3px 8px; border-radius: 4px; font-size: 12px; }
+        .colors { margin: 5px 0; }
+        .color { display: inline-block; width: 20px; height: 20px; border-radius: 50%; margin-right: 5px; }
+        .loading { text-align: center; font-style: italic; color: #666; }
+        .error { color: #dc3545; background: #f8d7da; padding: 10px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧙‍♂️ MTG Commander Deck Recommender</h1>
+        <p>Enter a commander name to get AI-powered card recommendations with perfect color identity matching!</p>
+    </div>
+
+    <div class="search-box">
+        <input type="text" id="commanderInput" placeholder="Enter commander name (e.g., Arcades)" />
+        <button onclick="getRecommendations()">Get Recommendations</button>
+    </div>
+
+    <div id="results"></div>
+
+    <script>
+        async function getRecommendations() {
+            const commander = document.getElementById('commanderInput').value;
+            const resultsDiv = document.getElementById('results');
+
+            if (!commander.trim()) {
+                resultsDiv.innerHTML = '<div class="error">Please enter a commander name</div>';
+                return;
+            }
+
+            resultsDiv.innerHTML = '<div class="loading">🔍 Searching for recommendations...</div>';
+
+            try {
+                const response = await fetch('/recommend', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ commander: commander, num_recommendations: 10 })
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    resultsDiv.innerHTML = `<div class="error">${data.error}</div>`;
+                    return;
+                }
+
+                displayResults(data);
+            } catch (error) {
+                resultsDiv.innerHTML = '<div class="error">Error getting recommendations. Please try again.</div>';
+            }
+        }
+
+        function displayResults(data) {
+            const resultsDiv = document.getElementById('results');
+
+            let html = `
+                <div class="commander-info">
+                    <h2>Commander: ${data.commander.name}</h2>
+                    <p><strong>Type:</strong> ${data.commander.type}</p>
+                    <p><strong>Color Identity:</strong> ${data.commander.colors.join(', ') || 'Colorless'}</p>
+                </div>
+
+                <h3>🎯 Recommended Cards (${data.recommendations.length} found)</h3>
+                <div class="recommendations">
+            `;
+
+            data.recommendations.forEach((card, index) => {
+                html += `
+                    <div class="card">
+                        <div class="card-name">${index + 1}. ${card.name} 
+                            <span class="similarity">Similarity: ${(card.similarity * 100).toFixed(1)}%</span>
+                        </div>
+                        <div class="card-type">${card.type}</div>
+                        <div class="colors">Colors: ${card.colors.join(', ') || 'Colorless'}</div>
+                        <div class="card-text">${card.text}</div>
+                    </div>
+                `;
+            });
+
+            html += '</div>';
+            resultsDiv.innerHTML = html;
+        }
+
+        // Allow Enter key to trigger search
+        document.getElementById('commanderInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                getRecommendations();
+            }
+        });
+    </script>
+</body>
+</html>
