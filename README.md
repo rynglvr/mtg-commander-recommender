@@ -41,7 +41,7 @@ An AI-powered Magic: The Gathering Commander deck recommendation system that sug
 
 3. **Run data collection**
    jupyter notebook
-   # Run 01_data_exploration.ipynb to collect fresh data
+   Run 01_data_exploration.ipynb to collect fresh data
 
 4. **Start app**
    python app.py
