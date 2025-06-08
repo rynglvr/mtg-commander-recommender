@@ -58,3 +58,28 @@ Scryfall API for MTG data
 The MTG community for deck building insights
 
 Magic: The Gathering is © Wizards of the Coast
+
+## 🆕 Recent Enhancements
+
+### v2.0 - Comprehensive Multi-Word Keyword System
+- **Expanded Keyword Coverage**: From 28 to 100+ keywords including multi-word phrases
+- **Better Phrase Matching**: Now recognizes "enters the battlefield", "combat damage", "+1/+1 counter", etc.
+- **Improved Recommendations**: Dramatically better suggestions for complex commanders
+- **Zero Similarity Fix**: Resolved issues where commanders got no meaningful recommendations
+- **Enhanced Tribal Support**: Better recognition of creature types and tribal synergies
+
+### Key Improvements:
+- **Multi-word phrases**: "first strike", "artifact creature", "whenever you cast"
+- **Triggered abilities**: "when enters", "at the beginning of", "whenever attacks"  
+- **Combat mechanics**: "combat damage", "attacking creature", "blocking creature"
+- **Counter synergies**: "+1/+1 counter", "proliferate", "counter on it"
+- **Tribal keywords**: All major creature types (Human, Elf, Goblin, etc.)
+
+## 🎯 Examples of Improved Recommendations
+
+**Before**: Isshin returned cards with 0% similarity  
+**After**: Isshin now finds relevant combat and triggered ability synergies
+
+**Before**: Limited to single-word matches like "flying" or "artifact"  
+**After**: Recognizes complex phrases like "whenever this creature attacks"
+
