@@ -8,9 +8,8 @@ import ast
 
 app = Flask(__name__)
 
-# Define color functions directly in this file
+# Color identity functions
 def get_color_identity(colors_string):
-    """Convert color string to set for easier comparison"""
     if pd.isna(colors_string) or colors_string == '[]':
         return set()
     try:
@@ -20,24 +19,35 @@ def get_color_identity(colors_string):
         return set()
 
 def is_legal_in_deck(card_colors_string, commander_colors_string):
-    """Check if card is legal in commander's color identity"""
     card_identity = get_color_identity(card_colors_string)
     commander_identity = get_color_identity(commander_colors_string)
     return card_identity.issubset(commander_identity)
 
-# Load our saved model (without the functions)
-print("Loading ML model...")
-with open('data/mtg_model.pkl', 'rb') as f:
-    model_data = pickle.load(f)
+# Load enhanced model
+print("Loading enhanced ML model...")
+try:
+    with open('data/mtg_model_enhanced.pkl', 'rb') as f:
+        model_data = pickle.load(f)
 
-df_clean = model_data['df_clean']
-keyword_matrix = model_data['keyword_matrix']
-keywords = model_data['keywords']
+    df_clean = model_data['df_clean']
+    keyword_matrix = model_data['keyword_matrix']
+    keywords = model_data['keywords']
 
-print(f"Model loaded! {len(df_clean)} cards available")
+    print(f"Enhanced model loaded!")
+    print(f"  - {len(df_clean)} cards")
+    print(f"  - {len(keywords)} keywords")
+    print(f"  - Model version: {model_data.get('model_version', 'unknown')}")
+
+except FileNotFoundError:
+    print("Enhanced model not found, falling back to basic model...")
+    with open('data/mtg_model.pkl', 'rb') as f:
+        model_data = pickle.load(f)
+    df_clean = model_data['df_clean']
+    keyword_matrix = model_data['keyword_matrix']
+    keywords = model_data['keywords']
 
 def find_recommendations(commander_name, num_recommendations=10):
-    """Main recommendation function for web app"""
+    """Enhanced recommendation function"""
     # Find commander
     card_matches = df_clean[df_clean['name'].str.contains(commander_name, case=False, na=False)]
 
@@ -53,21 +63,25 @@ def find_recommendations(commander_name, num_recommendations=10):
     similarities = cosine_similarity(commander_vector, keyword_matrix).flatten()
     all_indices = similarities.argsort()[::-1]
 
-    # Filter for legal cards
+    # Filter for legal cards with non-zero similarity
     results = []
     for idx in all_indices:
         if idx == commander_idx:
             continue
 
         card_row = df_clean.iloc[idx]
-        if is_legal_in_deck(card_row['colors'], commander_colors):
+        similarity = similarities[idx]
+
+        # Only include cards with some similarity and legal color identity
+        if similarity > 0 and is_legal_in_deck(card_row['colors'], commander_colors):
             results.append({
                 'name': card_row['name'],
-                'similarity': float(similarities[idx]),
+                'similarity': float(similarity),
                 'type': card_row['type_line'],
                 'colors': list(get_color_identity(card_row['colors'])),
                 'text': card_row['oracle_text'][:200] + "..." if len(card_row['oracle_text']) > 200 else card_row['oracle_text'],
-                'price': card_row.get('usd', 'N/A')
+                'mana_cost': card_row.get('mana_cost', ''),
+                'rarity': card_row.get('rarity', 'unknown')
             })
 
             if len(results) >= num_recommendations:
@@ -77,9 +91,14 @@ def find_recommendations(commander_name, num_recommendations=10):
         "commander": {
             "name": commander_row['name'],
             "colors": list(get_color_identity(commander_colors)),
-            "type": commander_row['type_line']
+            "type": commander_row['type_line'],
+            "text": commander_row['oracle_text']
         },
-        "recommendations": results
+        "recommendations": results,
+        "model_info": {
+            "keywords_used": len(keywords),
+            "version": "Enhanced Multi-Word Keywords"
+        }
     }
 
 @app.route('/')
@@ -94,6 +113,15 @@ def recommend():
 
     result = find_recommendations(commander, num_recs)
     return jsonify(result)
+
+@app.route('/model_info')
+def model_info():
+    return jsonify({
+        "total_cards": len(df_clean),
+        "total_keywords": len(keywords),
+        "sample_keywords": keywords[:20],
+        "model_version": "Enhanced Multi-Word Keywords v2"
+    })
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
