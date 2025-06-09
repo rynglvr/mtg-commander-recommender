@@ -27,13 +27,11 @@ def is_legal_in_deck(card_colors_string, commander_colors_string):
 def get_card_image_url(row, size='normal'):
     """Extract card image URL from the image_uris field"""
     try:
-        # Check if image_uris exists and is not null
         if 'image_uris' not in row or pd.isna(row['image_uris']):
             return None
 
         image_uris = row['image_uris']
 
-        # Parse the string representation of the dictionary
         if isinstance(image_uris, str):
             try:
                 image_dict = ast.literal_eval(image_uris)
@@ -47,17 +45,46 @@ def get_card_image_url(row, size='normal'):
         else:
             return None
 
-        # Get the requested size or fallback
         size_priority = [size, 'normal', 'small', 'large']
         for sz in size_priority:
             if sz in image_dict:
                 return image_dict[sz]
 
-        # Return any available image if none of the preferred sizes found
         return list(image_dict.values())[0] if image_dict else None
 
     except Exception as e:
         print(f"Error getting image for {row.get('name', 'unknown')}: {e}")
+        return None
+
+def get_card_price(row):
+    """Extract USD price from the prices field"""
+    try:
+        if 'prices' not in row or pd.isna(row['prices']):
+            return None
+
+        prices_str = row['prices']
+
+        if isinstance(prices_str, str):
+            try:
+                prices_dict = ast.literal_eval(prices_str)
+
+                usd_price = prices_dict.get('usd')
+
+                if usd_price is not None and usd_price != 'None' and usd_price != '':
+                    try:
+                        price_float = float(usd_price)
+                        return f"{price_float:.2f}"
+                    except (ValueError, TypeError):
+                        return str(usd_price)
+
+                return None
+
+            except (ValueError, SyntaxError) as e:
+                return None
+
+        return None
+
+    except Exception as e:
         return None
 
 # Load enhanced model
@@ -74,13 +101,6 @@ try:
     print(f"  - {len(df_clean)} cards")
     print(f"  - {len(keywords)} keywords")
 
-    # Test image extraction on first few cards
-    print("Testing image extraction:")
-    for i in range(3):
-        card = df_clean.iloc[i]
-        img_url = get_card_image_url(card)
-        print(f"  {card['name']}: {'✅' if img_url else '❌'} {img_url[:50] if img_url else 'No image'}...")
-
 except FileNotFoundError:
     print("Enhanced model not found, using basic model...")
     with open('data/mtg_model.pkl', 'rb') as f:
@@ -89,9 +109,78 @@ except FileNotFoundError:
     keyword_matrix = model_data['keyword_matrix']
     keywords = model_data['keywords']
 
-def find_recommendations(commander_name, num_recommendations=10):
-    """Enhanced recommendation function with images"""
-    # Find commander
+
+def clean_for_json(obj):
+    """Clean NaN values from objects before JSON serialization"""
+    import math
+
+    if isinstance(obj, dict):
+        return {k: clean_for_json(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [clean_for_json(item) for item in obj]
+    elif isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+        return None
+    else:
+        return obj
+
+
+def clean_for_json(obj):
+    """Clean NaN values from objects before JSON serialization"""
+    import math
+
+    if isinstance(obj, dict):
+        return {k: clean_for_json(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [clean_for_json(item) for item in obj]
+    elif isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+        return None
+    else:
+        return obj
+
+
+def clean_for_json(obj):
+    """Clean NaN values from objects before JSON serialization"""
+    import math
+
+    if isinstance(obj, dict):
+        return {k: clean_for_json(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [clean_for_json(item) for item in obj]
+    elif isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+        return None
+    else:
+        return obj
+
+
+def clean_for_json(obj):
+    """Clean NaN values from objects before JSON serialization"""
+    import math
+
+    if isinstance(obj, dict):
+        return {k: clean_for_json(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [clean_for_json(item) for item in obj]
+    elif isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+        return None
+    else:
+        return obj
+
+
+def clean_for_json(obj):
+    """Clean NaN values from objects before JSON serialization"""
+    import math
+
+    if isinstance(obj, dict):
+        return {k: clean_for_json(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [clean_for_json(item) for item in obj]
+    elif isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+        return None
+    else:
+        return obj
+
+def find_recommendations(commander_name, num_recommendations=300):
+    """Enhanced recommendation function with prices"""
     card_matches = df_clean[df_clean['name'].str.contains(commander_name, case=False, na=False)]
 
     if len(card_matches) == 0:
@@ -102,11 +191,9 @@ def find_recommendations(commander_name, num_recommendations=10):
     commander_colors = commander_row['colors']
     commander_vector = keyword_matrix[commander_idx].reshape(1, -1)
 
-    # Calculate similarities
     similarities = cosine_similarity(commander_vector, keyword_matrix).flatten()
     all_indices = similarities.argsort()[::-1]
 
-    # Filter for legal cards with non-zero similarity
     results = []
     for idx in all_indices:
         if idx == commander_idx:
@@ -115,39 +202,50 @@ def find_recommendations(commander_name, num_recommendations=10):
         card_row = df_clean.iloc[idx]
         similarity = similarities[idx]
 
-        # Only include cards with some similarity and legal color identity
         if similarity > 0 and is_legal_in_deck(card_row['colors'], commander_colors):
+            # Get price for this card
+            card_price = get_card_price(card_row)
+
             card_result = {
                 'name': card_row['name'],
                 'similarity': float(similarity),
                 'type': card_row['type_line'],
                 'colors': list(get_color_identity(card_row['colors'])),
                 'text': card_row['oracle_text'][:200] + "..." if len(card_row['oracle_text']) > 200 else card_row['oracle_text'],
-                'mana_cost': card_row.get('mana_cost', ''),
+                'mana_cost': card_row.get('mana_cost', '') if pd.notna(card_row.get('mana_cost')) else '',
                 'rarity': card_row.get('rarity', 'unknown'),
                 'image_url': get_card_image_url(card_row, 'normal'),
-                'scryfall_url': card_row.get('scryfall_uri', '')
+                'scryfall_url': card_row.get('scryfall_uri', ''),
+                'price': card_price
             }
+
+            # Clean any NaN values
+            card_result = clean_for_json(card_result)
+
             results.append(card_result)
 
             if len(results) >= num_recommendations:
                 break
 
-    return {
+    response_data = {
         "commander": {
             "name": commander_row['name'],
             "colors": list(get_color_identity(commander_colors)),
             "type": commander_row['type_line'],
             "text": commander_row['oracle_text'],
             "image_url": get_card_image_url(commander_row, 'normal'),
-            "scryfall_url": commander_row.get('scryfall_uri', '')
+            "scryfall_url": commander_row.get('scryfall_uri', ''),
+            "price": get_card_price(commander_row)
         },
         "recommendations": results,
         "model_info": {
             "keywords_used": len(keywords),
-            "version": "Enhanced Multi-Word Keywords with Images v1.1"
+            "version": "Enhanced Multi-Word Keywords with Images and Prices"
         }
     }
+
+    # Clean the entire response of NaN values
+    return clean_for_json(response_data)
 
 @app.route('/')
 def home():
@@ -155,22 +253,24 @@ def home():
 
 @app.route('/recommend', methods=['POST'])
 def recommend():
-    data = request.get_json()
-    commander = data.get('commander', '')
-    num_recs = data.get('num_recommendations', 10)
+    try:
+        data = request.get_json()
+        commander = data.get('commander', '')
+        num_recs = data.get('num_recommendations', 300)
 
-    result = find_recommendations(commander, num_recs)
-    return jsonify(result)
+        print(f"DEBUG: Received request for {commander} with {num_recs} recommendations")
 
-@app.route('/test')
-def test():
-    """Test endpoint to check image URLs"""
-    test_card = df_clean.iloc[0]
-    return jsonify({
-        'name': test_card['name'],
-        'image_url': get_card_image_url(test_card),
-        'raw_image_uris': test_card.get('image_uris', 'Not found')
-    })
+        result = find_recommendations(commander, num_recs)
+
+        print(f"DEBUG: Successfully generated {len(result.get('recommendations', []))} recommendations")
+
+        return jsonify(result)
+
+    except Exception as e:
+        print(f"ERROR in recommend route: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": f"Server error: {str(e)}"})
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)
