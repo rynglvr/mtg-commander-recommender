@@ -5,7 +5,6 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 import ast
-import json
 
 app = Flask(__name__)
 
@@ -27,37 +26,22 @@ def is_legal_in_deck(card_colors_string, commander_colors_string):
 def get_card_image_url(row, size='normal'):
     """Extract card image URL from the image_uris field"""
     try:
-        # Check if image_uris exists and is not null
-        if 'image_uris' not in row or pd.isna(row['image_uris']):
+        if pd.isna(row.get('image_uris')):
             return None
 
-        image_uris = row['image_uris']
+        # Parse the image_uris string
+        image_dict = ast.literal_eval(row['image_uris'])
 
-        # Parse the string representation of the dictionary
-        if isinstance(image_uris, str):
-            try:
-                image_dict = ast.literal_eval(image_uris)
-            except:
-                try:
-                    image_dict = json.loads(image_uris)
-                except:
-                    return None
-        elif isinstance(image_uris, dict):
-            image_dict = image_uris
-        else:
-            return None
-
-        # Get the requested size or fallback
+        # Return requested size, with fallbacks
         size_priority = [size, 'normal', 'small', 'large']
         for sz in size_priority:
             if sz in image_dict:
                 return image_dict[sz]
 
-        # Return any available image if none of the preferred sizes found
+        # If none found, return any available URL
         return list(image_dict.values())[0] if image_dict else None
 
     except Exception as e:
-        print(f"Error getting image for {row.get('name', 'unknown')}: {e}")
         return None
 
 # Load enhanced model
@@ -74,15 +58,8 @@ try:
     print(f"  - {len(df_clean)} cards")
     print(f"  - {len(keywords)} keywords")
 
-    # Test image extraction on first few cards
-    print("Testing image extraction:")
-    for i in range(3):
-        card = df_clean.iloc[i]
-        img_url = get_card_image_url(card)
-        print(f"  {card['name']}: {'✅' if img_url else '❌'} {img_url[:50] if img_url else 'No image'}...")
-
 except FileNotFoundError:
-    print("Enhanced model not found, using basic model...")
+    print("Enhanced model not found, falling back to basic model...")
     with open('data/mtg_model.pkl', 'rb') as f:
         model_data = pickle.load(f)
     df_clean = model_data['df_clean']
@@ -145,7 +122,7 @@ def find_recommendations(commander_name, num_recommendations=10):
         "recommendations": results,
         "model_info": {
             "keywords_used": len(keywords),
-            "version": "Enhanced Multi-Word Keywords with Images v1.1"
+            "version": "Enhanced Multi-Word Keywords with Images"
         }
     }
 
@@ -162,15 +139,5 @@ def recommend():
     result = find_recommendations(commander, num_recs)
     return jsonify(result)
 
-@app.route('/test')
-def test():
-    """Test endpoint to check image URLs"""
-    test_card = df_clean.iloc[0]
-    return jsonify({
-        'name': test_card['name'],
-        'image_url': get_card_image_url(test_card),
-        'raw_image_uris': test_card.get('image_uris', 'Not found')
-    })
-
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    app.run(debug=True, port=5000)
