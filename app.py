@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, jsonify
 import pickle
 import pandas as pd
@@ -87,28 +86,22 @@ def get_card_price(row):
     except Exception as e:
         return None
 
-# Load enhanced model
-print("Loading enhanced ML model...")
+# Load model
+print("Loading ML model...")
 try:
-    with open('data/mtg_model_enhanced.pkl', 'rb') as f:
+    with open('data/mtg_match_model.pkl', 'rb') as f:
         model_data = pickle.load(f)
 
     df_clean = model_data['df_clean']
     keyword_matrix = model_data['keyword_matrix']
     keywords = model_data['keywords']
 
-    print(f"Enhanced model loaded!")
+    print(f"Model loaded!")
     print(f"  - {len(df_clean)} cards")
     print(f"  - {len(keywords)} keywords")
 
 except FileNotFoundError:
-    print("Enhanced model not found, using basic model...")
-    with open('data/mtg_model.pkl', 'rb') as f:
-        model_data = pickle.load(f)
-    df_clean = model_data['df_clean']
-    keyword_matrix = model_data['keyword_matrix']
-    keywords = model_data['keywords']
-
+    print("Model not found...")
 
 def clean_for_json(obj):
     """Clean NaN values from objects before JSON serialization"""
@@ -151,7 +144,7 @@ def clean_for_json(obj):
     else:
         return obj
 
-
+'''
 def clean_for_json(obj):
     """Clean NaN values from objects before JSON serialization"""
     import math
@@ -178,8 +171,15 @@ def clean_for_json(obj):
         return None
     else:
         return obj
+'''
 
-def find_recommendations(commander_name, num_recommendations=300):
+def safe_text_truncate(text, max_length=500):
+    """Safely truncate text, handling NaN and non-string values"""
+    if pd.isna(text) or not isinstance(text, str):
+        return ""
+    return text[:max_length] + "..." if len(text) > max_length else text
+
+def find_recommendations(commander_name, num_recommendations=15):
     """Enhanced recommendation function with prices"""
     card_matches = df_clean[df_clean['name'].str.contains(commander_name, case=False, na=False)]
 
@@ -211,7 +211,8 @@ def find_recommendations(commander_name, num_recommendations=300):
                 'similarity': float(similarity),
                 'type': card_row['type_line'],
                 'colors': list(get_color_identity(card_row['colors'])),
-                'text': card_row['oracle_text'][:200] + "..." if len(card_row['oracle_text']) > 200 else card_row['oracle_text'],
+                 #'text': card_row['oracle_text'][:200] + "..." if len(card_row['oracle_text']) > 200 else card_row['oracle_text'],
+                'text': safe_text_truncate(card_row['oracle_text']),
                 'mana_cost': card_row.get('mana_cost', '') if pd.notna(card_row.get('mana_cost')) else '',
                 'rarity': card_row.get('rarity', 'unknown'),
                 'image_url': get_card_image_url(card_row, 'normal'),
@@ -240,7 +241,7 @@ def find_recommendations(commander_name, num_recommendations=300):
         "recommendations": results,
         "model_info": {
             "keywords_used": len(keywords),
-            "version": "Enhanced Multi-Word Keywords with Images and Prices"
+            "version": "20250611"
         }
     }
 
@@ -256,7 +257,7 @@ def recommend():
     try:
         data = request.get_json()
         commander = data.get('commander', '')
-        num_recs = data.get('num_recommendations', 300)
+        num_recs = data.get('num_recommendations', 15)
 
         print(f"DEBUG: Received request for {commander} with {num_recs} recommendations")
 

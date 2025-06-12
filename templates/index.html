@@ -392,12 +392,12 @@
 </head>
 <body>
     <div class="header">
-        <h1>🧙‍♂️ MTG Commander Deck Recommender</h1>
-        <p>Enter a commander name to get AI-powered card recommendations with perfect color identity matching!</p>
+        <h1>Ryan's Super Cool Commander Tool</h1>
+        <p>Enter a commander name to get deck recommendations (Please note that Yuval is not allowed to use this tool I built)</p>
     </div>
 
     <div class="search-box">
-        <input type="text" id="commanderInput" placeholder="Enter commander name (e.g., Arcades, Isshin, Krenko)" />
+        <input type="text" id="commanderInput" placeholder="Enter commander name (e.g., Arcades, the Strategist)" />
         <button onclick="getRecommendations()">Get Recommendations</button>
     </div>
 
@@ -442,17 +442,17 @@
             const resultsDiv = document.getElementById('results');
 
             if (!commander.trim()) {
-                resultsDiv.innerHTML = '<div class="error">Please enter a commander name</div>';
+                resultsDiv.innerHTML = '<div class="error">Enter a commander to get started</div>';
                 return;
             }
 
-            resultsDiv.innerHTML = '<div class="loading">🔍 Searching for recommendations...</div>';
+            resultsDiv.innerHTML = '<div class="loading">Searching for recommendations...</div>';
 
             try {
                 const response = await fetch('/recommend', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ commander: commander, num_recommendations: 100 })
+                    body: JSON.stringify({ commander: commander, num_recommendations: 150 })
                 });
 
                 if (!response.ok) {
@@ -507,7 +507,7 @@
                 </div>
 
                 <div class="recommendations-section">
-                    <h3 class="recommendations-header">🎯 Recommended Cards (${data.recommendations.length} found)</h3>
+                    <h3 class="recommendations-header">Recommended Cards (${data.recommendations.length} found)</h3>
                     <div class="results-grid">`;
 
             data.recommendations.forEach((card, index) => {

@@ -1,0 +1,228 @@
+# MTG Simplified Keyword System
+
+## Base Words (auto-generates plurals/variations):
+adapt
+age
+angel
+artifact
+attach
+attack
+aura
+battalion
+battlefield
+beast
+bird
+block
+buyback
+cascade
+cast
+cat
+charge
+cipher
+combat
+constellation
+convoke
+counter
+creature
+damage
+deathtouch
+defender
+delirium
+delve
+demon
+destroy
+die
+discard
+dog
+dragon
+draw
+dredge
+elemental
+elf
+eminence
+enchant
+enchantment
+energy
+enter
+equip
+equipment
+evolve
+exile
+experience
+explore
+fabricate
+flash
+flashback
+flying
+goblin
+graft
+graveyard
+hand
+haste
+hexproof
+human
+improvise
+indestructible
+insect
+instant
+investigate
+knight
+land
+landfall
+leave
+library
+lifelink
+loyalty
+mana
+menace
+mentor
+merfolk
+metalcraft
+mill
+modular
+oil
+partner
+persist
+planeswalker
+poison
+proliferate
+prowess
+ramp
+reach
+rebound
+return
+reveal
+riot
+sacrifice
+scavenge
+search
+shield
+soldier
+sorcery
+spell
+spirit
+storm
+stun
+tap
+target
+threshold
+time
+token
+trample
+undergrowth
+undying
+unleash
+untap
+vampire
+vigilance
+ward
+warrior
+wizard
+zombie
+
+## Exact Phrases:
++1/+1 counter
+-1/-1 counter
+add mana
+artifact creature
+artifact token
+at the beginning of combat
+at the beginning of each upkeep
+at the beginning of your end step
+at the beginning of your upkeep
+basic land
+basic landcycling
+blood token
+can't be blocked
+can't be countered
+can't be destroyed
+can't be targeted
+charge counter
+choose a background
+choose a player
+clue token
+combat damage to a player
+combat damage to an opponent
+command zone
+commander damage
+commander tax
+converted mana cost
+costs less to cast
+create a token
+creature token
+creature you control
+cumulative upkeep
+deals combat damage
+discard a card
+double strike
+draw a card
+draw cards
+each opponent
+each player
+enchantment creature
+end of turn
+energy counter
+enters the battlefield
+exile a card
+experience counter
+first strike
+food token
+instant or sorcery
+laboratory maniac
+leaves the battlefield
+legendary artifact
+legendary creature
+legendary enchantment
+legendary planeswalker
+level up
+living weapon
+loyalty counter
+mana cost
+mana of any color
+mana value
+nonbasic land
+noncreature spell
+other angel
+other beast
+other demon
+other dragon
+other elemental
+other elf
+other goblin
+other human
+other knight
+other soldier
+other spirit
+other vampire
+other warrior
+other wizard
+other zombie
+partner with
+poison counter
+prevent damage
+protection from
+return from graveyard
+return to hand
+search your library
+split second
+target creature
+target opponent
+target player loses the game
+thassa's oracle
+this creature
+this turn
+time counter
+totem armor
+treasure token
+until end of turn
+when this creature attacks
+when this creature dies
+whenever this creature attacks
+whenever this creature dies
+whenever you cast a creature spell
+whenever you cast a noncreature spell
+whenever you cast a spell
+whenever you cast an instant or sorcery
+without paying
+you control
+you win the game

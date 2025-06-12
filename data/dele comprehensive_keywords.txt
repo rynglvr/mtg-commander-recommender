@@ -1,0 +1,931 @@
+  1. +1/+1 counter
+  2. +1/+1 counters
+  3. -1/-1 counter
+  4. absorb
+  5. absorbs
+  6. activate loyalty abilities
+  7. adapt
+  8. adapts
+  9. add mana
+ 10. addendum
+ 11. addendums
+ 12. additional cost
+ 13. additional land
+ 14. affinities
+ 15. affinity
+ 16. affinity for artifacts
+ 17. age
+ 18. age counter
+ 19. age counters
+ 20. ages
+ 21. alliance
+ 22. alliances
+ 23. allies
+ 24. ally
+ 25. alternate win condition
+ 26. amplifies
+ 27. amplify
+ 28. angel
+ 29. angels
+ 30. annihilator
+ 31. annihilators
+ 32. approach of the second sun
+ 33. artifact
+ 34. artifact creature
+ 35. artifact dies
+ 36. artifact enters
+ 37. artifact token
+ 38. artifacts
+ 39. ascend
+ 40. ascends
+ 41. assist
+ 42. assists
+ 43. at end of
+ 44. at the beginning of combat
+ 45. at the beginning of each end step
+ 46. at the beginning of each player's upkeep
+ 47. at the beginning of each upkeep
+ 48. at the beginning of your draw step
+ 49. at the beginning of your end step
+ 50. at the beginning of your upkeep
+ 51. attach
+ 52. attaches
+ 53. attack
+ 54. attack alone
+ 55. attacked
+ 56. attacking
+ 57. attacking creature
+ 58. attacking or blocking
+ 59. attacks
+ 60. aura
+ 61. auras
+ 62. avatar
+ 63. avatars
+ 64. awaken
+ 65. awakens
+ 66. background
+ 67. backup
+ 68. backups
+ 69. banding
+ 70. bandings
+ 71. basic
+ 72. basic land
+ 73. basic landcycling
+ 74. basics
+ 75. battalion
+ 76. battalions
+ 77. battlefield
+ 78. battlefields
+ 79. beast
+ 80. beasts
+ 81. bestow
+ 82. bestows
+ 83. bird
+ 84. birds
+ 85. block
+ 86. blocked
+ 87. blocking
+ 88. blocking creature
+ 89. blocks
+ 90. blocks or becomes blocked
+ 91. blood
+ 92. blood token
+ 93. bloodrush
+ 94. bloodrushes
+ 95. bloods
+ 96. bloodthirst
+ 97. bloodthirsts
+ 98. bottom of library
+ 99. bushido
+100. bushidos
+101. buyback
+102. buybacks
+103. can attack
+104. can block
+105. can't be blocked
+106. can't be countered
+107. can't be destroyed
+108. can't be targeted
+109. can't lose the game
+110. can't win the game
+111. cannot attack
+112. cannot block
+113. cascade
+114. cascades
+115. cast
+116. cast from graveyard
+117. cast this
+118. casting
+119. casts
+120. cat
+121. cats
+122. champion
+123. champions
+124. changeling
+125. changelings
+126. channel
+127. channels
+128. charge
+129. charge counter
+130. charge counters
+131. charges
+132. choose
+133. choose a background
+134. choose a creature type
+135. choose a player
+136. chooses
+137. choosing
+138. chose
+139. chroma
+140. chromas
+141. cipher
+142. ciphers
+143. clash
+144. clashes
+145. cleave
+146. cleaves
+147. cleric
+148. clerics
+149. clue
+150. clue token
+151. clues
+152. cohort
+153. cohorts
+154. colored
+155. colored mana
+156. coloreds
+157. colorless
+158. colorless mana
+159. colorlesses
+160. combat
+161. combat damage to a player
+162. combat damage to an opponent
+163. combats
+164. combo
+165. combos
+166. command zone
+167. commander damage
+168. commander tax
+169. conspire
+170. conspires
+171. constellation
+172. constellations
+173. converge
+174. converges
+175. converted mana cost
+176. convoke
+177. convokes
+178. costs less
+179. costs less to cast
+180. costs more
+181. council's dilemma
+182. counter
+183. counter on it
+184. counters
+185. counters on it
+186. create a blood token
+187. create a clue token
+188. create a creature token
+189. create a food token
+190. create a token
+191. create a treasure token
+192. creature
+193. creature spell
+194. creature token
+195. creature you control
+196. creatures
+197. crew
+198. crews
+199. cumulative upkeep
+200. curse
+201. curses
+202. cycling
+203. cyclings
+204. damage
+205. damage prevention
+206. damages
+207. dash
+208. dashes
+209. daybound
+210. daybounds
+211. deals combat damage
+212. deals damage equal to its power
+213. deals damage to a creature
+214. deals damage to a player
+215. deathtouch
+216. deathtouches
+217. defender
+218. defenders
+219. delirium
+220. deliriums
+221. delve
+222. delves
+223. demon
+224. demons
+225. demonstrate
+226. demonstrates
+227. destroies
+228. destroy
+229. destroy all
+230. destroy target
+231. destroyed
+232. destroying
+233. destroys
+234. dethrone
+235. dethrones
+236. devoid
+237. devoids
+238. devour
+239. devours
+240. die
+241. died
+242. dies
+243. dinosaur
+244. dinosaurs
+245. discard
+246. discard a card
+247. discard cards
+248. discarded
+249. discarding
+250. discards
+251. disturb
+252. disturbs
+253. dog
+254. dogs
+255. domain
+256. domains
+257. double strike
+258. double strike damage
+259. doubling season
+260. dragon
+261. dragons
+262. draw
+263. draw a card
+264. draw additional
+265. draw cards
+266. draw three cards
+267. draw two cards
+268. drawing
+269. draws
+270. dredge
+271. dredges
+272. drew
+273. during each
+274. during each player's turn
+275. during your turn
+276. dying
+277. each opponent
+278. each player
+279. echo
+280. echos
+281. eldrazi
+282. eldrazis
+283. elemental
+284. elementals
+285. elf
+286. elves
+287. embalm
+288. embalms
+289. emerge
+290. emerges
+291. eminence
+292. eminences
+293. enchant
+294. enchanted
+295. enchanteds
+296. enchantment
+297. enchantment creature
+298. enchantment enters
+299. enchantment token
+300. enchantments
+301. enchants
+302. encore
+303. encores
+304. end of turn
+305. energies
+306. energy
+307. energy counter
+308. energy counters
+309. enrage
+310. enrages
+311. enter
+312. entered
+313. entering
+314. enters
+315. enters from graveyard
+316. enters tapped
+317. enters the battlefield
+318. enters the battlefield tapped
+319. enters the battlefield under your control
+320. enters the battlefield with
+321. entwine
+322. entwines
+323. epic
+324. epics
+325. equip
+326. equipment
+327. equipments
+328. equips
+329. escape
+330. escapes
+331. eternalize
+332. eternalizes
+333. evoke
+334. evokes
+335. evolve
+336. evolves
+337. exalted
+338. exalteds
+339. exile
+340. exile a card
+341. exile cards
+342. exiles
+343. experience
+344. experience counter
+345. experience counters
+346. experiences
+347. exploit
+348. exploits
+349. explore
+350. explores
+351. extort
+352. extorts
+353. extra land
+354. fabricate
+355. fabricates
+356. fading
+357. fadings
+358. faerie
+359. faeries
+360. fear
+361. fears
+362. ferocious
+363. ferociouses
+364. first strike
+365. first strike damage
+366. fish
+367. fishes
+368. flanking
+369. flankings
+370. flash
+371. flashback
+372. flashbacks
+373. flashes
+374. flying
+375. flyings
+376. food
+377. food token
+378. foods
+379. forecast
+380. forecasts
+381. fork
+382. forks
+383. formidable
+384. formidables
+385. fortifies
+386. fortify
+387. frenzies
+388. frenzy
+389. from exile
+390. from graveyard
+391. from library
+392. from your hand
+393. giant
+394. giants
+395. goblin
+396. goblins
+397. goes infinite
+398. gold
+399. gold token
+400. golds
+401. graft
+402. grafts
+403. grandeur
+404. grandeurs
+405. gravestorm
+406. gravestorms
+407. graveyard
+408. graveyard matters
+409. graveyard to battlefield
+410. graveyards
+411. habitat
+412. habitats
+413. hand
+414. hands
+415. haste
+416. hastes
+417. hellbent
+418. hellbents
+419. heroic
+420. heroics
+421. hexproof
+422. hexprooves
+423. hideawaies
+424. hideaway
+425. horror
+426. horrors
+427. horsemanship
+428. horsemanships
+429. human
+430. humans
+431. imprint
+432. imprints
+433. improvise
+434. improvises
+435. indestructible
+436. indestructibles
+437. infect
+438. infects
+439. infinite
+440. infinite combo
+441. infinites
+442. insect
+443. insects
+444. inspired
+445. inspireds
+446. instant
+447. instant or sorcery
+448. instant spell
+449. instants
+450. intimidate
+451. intimidates
+452. investigate
+453. investigates
+454. join forces
+455. kicker
+456. kickers
+457. kinship
+458. kinships
+459. knight
+460. knights
+461. laboratory maniac
+462. land
+463. land drops
+464. land enters
+465. land ramp
+466. landfall
+467. landfalls
+468. lands
+469. learn
+470. learns
+471. leave
+472. leaves
+473. leaves the battlefield
+474. leaving
+475. left
+476. legendaries
+477. legendary
+478. legendary artifact
+479. legendary creature
+480. legendary enchantment
+481. legendary planeswalker
+482. legendary sorcery
+483. level up
+484. libraries
+485. library
+486. lieutenant
+487. lieutenants
+488. lifelink
+489. lifelinks
+490. living weapon
+491. look
+492. look at the top X cards
+493. look at the top card
+494. looked
+495. looking
+496. looks
+497. loses the game
+498. loyalties
+499. loyalty
+500. loyalty ability
+501. loyalty counter
+502. loyalty counters
+503. madness
+504. madnesses
+505. magecraft
+506. magecrafts
+507. mana
+508. mana cost
+509. mana dork
+510. mana of any color
+511. mana rock
+512. mana value
+513. manas
+514. melee
+515. melees
+516. menace
+517. menaces
+518. mentor
+519. mentors
+520. merfolk
+521. merfolks
+522. metalcraft
+523. metalcrafts
+524. mill
+525. mills
+526. minus ability
+527. miracle
+528. miracles
+529. modular
+530. modulars
+531. morbid
+532. morbids
+533. morph
+534. morphs
+535. multikicker
+536. multikickers
+537. must attack
+538. must be blocked
+539. mutate
+540. mutates
+541. nightbound
+542. nightbounds
+543. ninjutsu
+544. ninjutsus
+545. nonbasic land
+546. noncreature artifact
+547. noncreature spell
+548. number of counters
+549. of the chosen type
+550. offering
+551. offerings
+552. oil
+553. oil counter
+554. oil counters
+555. oils
+556. on your turn
+557. once each turn
+558. other ally
+559. other angel
+560. other avatar
+561. other beast
+562. other cleric
+563. other demon
+564. other dinosaur
+565. other dragon
+566. other eldrazi
+567. other elemental
+568. other elf
+569. other faerie
+570. other fish
+571. other giant
+572. other goblin
+573. other horror
+574. other human
+575. other knight
+576. other phyrexian
+577. other rogue
+578. other shaman
+579. other sliver
+580. other snake
+581. other soldier
+582. other spider
+583. other spirit
+584. other treefolk
+585. other vampire
+586. other warrior
+587. other wizard
+588. other zombie
+589. outlast
+590. outlasts
+591. overload
+592. overloads
+593. parleies
+594. parley
+595. partner
+596. partner with
+597. partners
+598. pay mana
+599. persist
+600. persists
+601. phasing
+602. phasings
+603. phyrexian
+604. phyrexians
+605. place a counter
+606. plainscycling
+607. planeswalker
+608. planeswalkers
+609. plus ability
+610. poison
+611. poison counter
+612. poison counters
+613. poisonous
+614. poisonouses
+615. poisons
+616. populate
+617. populates
+618. power
+619. powers
+620. prevent
+621. prevent all damage
+622. prevent damage
+623. prevented
+624. preventing
+625. prevents
+626. proliferate
+627. proliferates
+628. protection
+629. protection from
+630. protections
+631. provoke
+632. provokes
+633. prowess
+634. prowesses
+635. put a counter
+636. put into graveyard
+637. radiance
+638. radiances
+639. raid
+640. raids
+641. rallies
+642. rally
+643. ramp
+644. rampage
+645. rampages
+646. ramps
+647. reach
+648. reaches
+649. reanimate
+650. reanimates
+651. rebound
+652. rebounds
+653. reconfigure
+654. reconfigures
+655. recover
+656. recovers
+657. redirect
+658. redirect damage
+659. redirected
+660. redirecting
+661. redirects
+662. reduce the cost
+663. regenerate
+664. regenerates
+665. reinforce
+666. reinforces
+667. remove a counter
+668. renown
+669. renowns
+670. replicate
+671. replicates
+672. retrace
+673. retraces
+674. return
+675. return from graveyard
+676. return to battlefield
+677. return to hand
+678. returns
+679. reveal
+680. revealed
+681. revealing
+682. reveals
+683. revolt
+684. revolts
+685. riot
+686. riots
+687. ripple
+688. ripples
+689. rogue
+690. rogues
+691. sacrifice
+692. sacrifice a land
+693. sacrifice all
+694. sacrifice artifact
+695. sacrifice creature
+696. sacrifice enchantment
+697. sacrifice land
+698. sacrificed
+699. sacrifices
+700. sacrificing
+701. saga
+702. sagas
+703. scavenge
+704. scavenges
+705. scries
+706. scry
+707. search
+708. search for a land
+709. search library
+710. search your library
+711. searched
+712. searches
+713. searching
+714. self-mill
+715. shadow
+716. shadows
+717. shaman
+718. shamans
+719. shares a creature type
+720. shield
+721. shield counter
+722. shield counters
+723. shields
+724. shroud
+725. shrouds
+726. shuffle
+727. shuffle library
+728. shuffled
+729. shuffles
+730. shuffling
+731. skulk
+732. skulks
+733. sliver
+734. slivers
+735. snake
+736. snakes
+737. snow
+738. snows
+739. soldier
+740. soldiers
+741. sorceries
+742. sorcery
+743. sorcery spell
+744. soulbond
+745. soulbonds
+746. soulshift
+747. soulshifts
+748. spark double
+749. spell
+750. spells
+751. spellslinger
+752. spellslingers
+753. spend mana
+754. spider
+755. spiders
+756. spirit
+757. spirits
+758. splice
+759. splices
+760. split second
+761. storm
+762. storms
+763. strive
+764. strives
+765. stun
+766. stun counter
+767. stun counters
+768. stuns
+769. sunburst
+770. sunbursts
+771. superfriends
+772. superfriendses
+773. surveil
+774. surveils
+775. suspend
+776. suspends
+777. sweep
+778. sweeps
+779. tap
+780. tap:
+781. tapped
+782. tapping
+783. taps
+784. target
+785. target creature
+786. target opponent
+787. target player loses the game
+788. targets
+789. tempting offer
+790. thassa's oracle
+791. this card
+792. this creature
+793. this spell
+794. this turn
+795. threshold
+796. thresholds
+797. time
+798. time counter
+799. time counters
+800. times
+801. to exile
+802. to graveyard
+803. to your hand
+804. token
+805. token creature
+806. tokens
+807. top of library
+808. totem armor
+809. toughness
+810. toughnesses
+811. toxic
+812. toxics
+813. training
+814. trainings
+815. trample
+816. tramples
+817. transform
+818. transforms
+819. transmute
+820. transmutes
+821. treasure
+822. treasure token
+823. treasures
+824. treefolk
+825. treefolks
+826. tribal
+827. tribal spell
+828. tribals
+829. tribute
+830. tributes
+831. ultimate ability
+832. unattach
+833. unattaches
+834. unblockable
+835. unblockables
+836. unblocked creature
+837. undaunted
+838. undaunteds
+839. undergrowth
+840. undergrowths
+841. undying
+842. undyings
+843. unearth
+844. unearths
+845. unleash
+846. unleashes
+847. untap
+848. untap:
+849. untapped
+850. untapping
+851. untaps
+852. until end of turn
+853. vampire
+854. vampires
+855. vanishing
+856. vanishings
+857. vehicle
+858. vehicles
+859. venture
+860. ventures
+861. vigilance
+862. vigilances
+863. vote
+864. votes
+865. wall
+866. walls
+867. ward
+868. wards
+869. warrior
+870. warriors
+871. when another creature enters the battlefield
+872. when attacks
+873. when becomes tapped
+874. when becomes untapped
+875. when blocks
+876. when destroyed
+877. when dies
+878. when enters
+879. when leaves
+880. when sacrificed
+881. when this creature attacks
+882. when this creature becomes blocked
+883. when this creature deals combat damage
+884. when this creature dies
+885. when this enters
+886. when this enters the battlefield
+887. when this leaves
+888. when you cast
+889. when you draw
+890. when you gain life
+891. when you lose life
+892. whenever
+893. whenever a creature enters the battlefield
+894. whenever attacks
+895. whenever becomes tapped
+896. whenever becomes untapped
+897. whenever blocks
+898. whenever deals damage
+899. whenever discards
+900. whenever enters
+901. whenever leaves
+902. whenever sacrifices
+903. whenever takes damage
+904. whenever this creature attacks
+905. whenever this creature becomes blocked
+906. whenever this creature deals combat damage
+907. whenever this creature dies
+908. whenever this enters
+909. whenever this leaves
+910. whenever you cast
+911. whenever you cast a creature spell
+912. whenever you cast a noncreature spell
+913. whenever you cast a spell
+914. whenever you cast an instant or sorcery
+915. whenever you cast your first spell
+916. whenever you cast your second spell
+917. whenever you draw
+918. whenever you gain life
+919. whenever you lose life
+920. will of the council
+921. wins the game
+922. with counters
+923. wither
+924. withers
+925. without paying
+926. wizard
+927. wizards
+928. you control
+929. you win the game
+930. zombie
+931. zombies
